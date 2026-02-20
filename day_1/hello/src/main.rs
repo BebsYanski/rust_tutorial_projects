@@ -1,3 +1,7 @@
-fn main() {
-    println!("Hello, Guys, this is day 1!");
+use std::io;
+
+fn main(){
+
+    println!("Simple Calculator")
+    println
 }
