@@ -3,6 +3,10 @@ fn main() {
     println!("Hello, Temperature Converter!");
     println!("1: Celsius to Fahrenheit");
     println!("2: Fahrenheit to Celsius");
+    println!("3: Celsius to Kelvin");
+    println!("4: Kelvin to Celsius");
+    // println!("5: Fahrenheit to Kelvin");
+    // println!("6: Kelvin to Fahrenheit");
     println!("Please enter your choice (1 or 2):");
 
     let mut choice = String::new(); // Create a mutable String variable to store the user's choice.
@@ -32,10 +36,14 @@ fn main() {
         let fahrenheit = celsius_to_fahrenheit(celsius); // Call the function to convert Celsius to Fahrenheit.
         println!("{} °C is equal to {} °F", celsius, fahrenheit); // Print the result of the conversion.
     } else if choice == 2 {
-       fahrenheit_to_celsius(celsius); // Call the function to convert Fahrenheit to Celsius.
+       fahrenheit_to_celsius(); // Call the function to convert Fahrenheit to Celsius.
        
+    } else if choice == 3 {
+        celsius_to_kelvin();
+    } else if choice == 4 {
+        kelvin_to_celsius();
     } else {
-        println!("Invalid choice. Please enter 1 or 2."); // If the user's choice is not 1 or 2, print an error message.
+        println!("Invalid choice. Please enter 1, 2, 3 or 4."); // If the user's choice is not 1 or 2, print an error message.
     }
 }
 
@@ -43,7 +51,7 @@ fn celsius_to_fahrenheit(celsius: f64) -> f64 {
     (celsius * 9.0 / 5.0) + 32.0 // Function to convert Celsius to Fahrenheit.
 }
 
-fn fahrenheit_to_celsius(fahrenheit: f64)  {
+fn fahrenheit_to_celsius()  {
     println!("Enter temperature in Fahrenheit:");
     let mut fahrenheit = String::new(); // Create a mutable String variable to store the user's input for Fahrenheit.
     io::stdin().read_line(&mut fahrenheit).expect("Failed to read line"); // Read the user's input for Fahrenheit.
@@ -58,4 +66,38 @@ fn fahrenheit_to_celsius(fahrenheit: f64)  {
 
     let celsius = (fahrenheit - 32.0) * 5.0 / 9.0; // Convert Fahrenheit to Celsius using the formula.
     println!("{:.2} °F is equal to {:.2} °C", fahrenheit, celsius); // Print the result of the conversion.
+}
+
+fn celsius_to_kelvin(){
+    println!("Enter temperature in Celsius");
+    let mut celsius = String::new();
+    io::stdin().read_line(&mut celsius).expect("Failed to read input");
+
+    let celsius: f64 = match celsius.trim().parse(){
+        Ok(num) => num,
+        Err(_) => {
+            println!("Invalid input. Please enter a valid number.");
+            return;
+        }
+    };
+
+    let kelvin = celsius + 273.15;
+    println!("{:.2}°C is equal to {:.2}K", celsius, kelvin)
+}
+
+fn kelvin_to_celsius(){
+    println!("Enter temperature in Kelvin");
+    let mut kelvin = String::new();
+    io::stdin().read_line(&mut kelvin).expect("Failed to read input");
+
+    let kelvin: f64 = match kelvin.trim().parse(){
+        Ok(num) => num,
+        Err(_) => {
+            println!("Invalid input. Please enter a valid number.");
+            return;
+        }
+    };
+
+    let celsius = kelvin - 273.15;
+    println!("{:.2}K is equal to {:.2}°C", kelvin, celsius)
 }
