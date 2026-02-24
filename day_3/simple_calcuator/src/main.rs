@@ -42,8 +42,10 @@ fn main(){
         "-" => subtract(num1 , num2),
         "*" => multiply(num1 , num2),
         "/" => divide(num1 , num2),
+        "%" => modulus(num1 , num2),
+        "^" => power(num1 , num2),
         _ => {
-            println!("Invalid operator. Use +, -, *, or /.");
+            println!("Invalid operator. Use +, -, *, /, %, or ^.");
             return
         }
 
@@ -69,4 +71,16 @@ fn divide(num1:f64,num2:f64) -> f64{
         std::process::exit(1);
     }
     num1 / num2
+}
+
+fn modulus(num1:f64,num2:f64) -> f64{
+    if num2 == 0.0 {
+        println!("Division by zero (0) is not allowed.");
+        std::process::exit(1);
+    }
+    num1 % num2
+}
+
+fn power(num1:f64,num2:f64) -> f64{
+    num1.powf(num2)
 }
