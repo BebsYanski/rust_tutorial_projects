@@ -1,3 +1,4 @@
+mod funcs;
 fn main() {
     let numbers = [1, 2, 3, 4, 5];
     println!("{:?}", numbers);
@@ -50,4 +51,14 @@ fn main() {
     let string: String = String::from("Hello World");
     let slice: &str = &string[0..5];
     println!("Slice Value: {}", slice);
+
+    // Functions
+    funcs::hello();
+
+    let _x = {
+        let price = 5;
+        let qty = 10;
+
+        price * qty
+    };
 }
