@@ -35,4 +35,19 @@ fn main() {
 
     let animal_slice: &[&String] = &[&"Goat".to_string(), &"New".to_string()];
     println!("{:?}", animal_slice);
+
+    // Strings vs String Slices (&str)
+    // Strings: [mutable,growable,owned string type].
+    // stored dynamically on the heap, hence slower
+    let mut name: String = String::from("Yannick");
+    println!("{}", name);
+    name.push_str(" Bebongnchu");
+
+    // B- &str (String slice)
+    // They are a reference to a string stored in memory, and they are immutable.
+    // Good for memory efficiency, and are fixed, and are stored on the stack, hence cannot grow
+
+    let string: String = String::from("Hello World");
+    let slice: &str = &string[0..5];
+    println!("Slice Value: {}", slice);
 }
