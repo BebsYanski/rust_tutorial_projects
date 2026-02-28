@@ -1,0 +1,3 @@
+Hello, this is a sample file.
+It contains some words.
+Try counting the words for me.
