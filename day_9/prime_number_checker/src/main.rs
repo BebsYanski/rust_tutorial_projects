@@ -1,28 +1,41 @@
+#![allow(warnings)]
 use std::io;
+mod solution;
 fn main() {
-    println!("Give number to check");
-    let number = match get_input() {
+    println!("Prime Number Checker");
+    println!("Enter a positive integer to check if it's a prime");
+
+    let number = match get_input_as_u32() {
         Some(value) => value,
         None => {
-            println!("Error");
+            println!("Invalid input, Please enter a positive integer");
             return;
         }
     };
 
-    println!("Prime: {}", check_prime(number))
-}
-
-fn check_prime(n: u32) -> bool {
-    let mut prime = true;
-    for num in 2..(n - 1) {
-        if n % num == 0 {
-            prime = false;
-        }
+    if number <= 1 {
+        println!("Number must be greater than 1.");
+        return;
     }
-    prime
-}
 
-fn get_input() -> Option<u32> {
+    if is_prime(number) {
+        println!("{} is a prime number.", number);
+        println!(
+            "List of prime numbers before {}: {:?}",
+            number,
+            solution::get_all_prime(number)
+        )
+    } else {
+        println!("{} is not a prime number.", number);
+        println!(
+            "List of prime numbers before {}: {:?}",
+            number,
+            solution::get_all_prime(number)
+        )
+    }
+}
+// Reads user input and attempts to parse it as u32
+fn get_input_as_u32() -> Option<u32> {
     let mut input = String::new();
 
     io::stdin()
@@ -33,4 +46,25 @@ fn get_input() -> Option<u32> {
         Ok(value) => Some(value),
         Err(_) => None,
     }
+}
+
+// Check prime
+fn is_prime(n: u32) -> bool {
+    if n <= 1 {
+        return false;
+    }
+    if n == 2 {
+        return true;
+    }
+    if n % 2 == 0 {
+        return false;
+    }
+
+    let limit = (n as f64).sqrt() as u32 + 1;
+    for i in 3..limit {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    true
 }
