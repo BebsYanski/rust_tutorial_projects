@@ -1,8 +1,35 @@
+#![allow(warnings)]
 use std::cmp;
 use std::io;
-fn main() {
-    println!("Hello guys");
+mod test;
 
+fn transpose(matrix: [[i32; 3]; 3]) -> [[i32; 3]; 3] {
+    let mut result = [[0; 3]; 3];
+    for i in 0..3 {
+        for j in 0..3 {
+            result[j][i] = matrix[i][j];
+        }
+    }
+    result
+}
+fn main() {
+    let matrix = [
+        [101, 102, 103], // <-- the comment makes rustfmt add a newline
+        [201, 202, 203],
+        [301, 302, 303],
+    ];
+    println!("Original:");
+    for row in matrix {
+        println!("{row:?}");
+    }
+    let transposed = transpose(matrix);
+    println!("\nTransposed:");
+    for row in transposed {
+        println!("{row:?}");
+    }
+    println!("{:?}", transposed);
+}
+fn compare() {
     loop {
         let mut input = String::new();
         println!("Give a number: 0 - 100: ");
@@ -57,6 +84,4 @@ fn main() {
 
         println!("You should give a number between 0 and 100\n\n")
     }
-
-    // Compare
 }
